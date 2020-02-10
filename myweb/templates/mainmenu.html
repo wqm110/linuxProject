@@ -1,0 +1,21 @@
+<div class="main-menu">
+    <h5 class="sidenav-heading">Main</h5>
+
+    <ul id="side-main-menu" class="side-menu list-unstyled">
+        {% for i in menulist %}
+            <li><a href="/{{ i.url }}"> <i class="icon-home"></i>{{ i.name }}</a></li>
+        {% endfor %}
+        <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i
+                class="icon-interface-windows"></i>Echarts</a>
+            <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                <li><a href="/echarts">echarts</a>1</li>
+                <li><a href="#2">Page</a>2</li>
+                <li><a href="#">Page</a>3</li>
+            </ul>
+        </li>
+        <li><a href="/login"> <i class="icon-interface-windows"></i>Login page </a></li>
+        <li><a href="#"> <i class="icon-mail"></i>Demo
+            <div class="badge badge-warning">6 New</div>
+        </a></li>
+    </ul>
+</div>

@@ -1,0 +1,101 @@
+
+{% extends 'index.html' %}
+{#<{% include 'mainmenu.html' %}>#}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h4>Striped table with hover effect</h4>
+        </div>
+        <a class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                {% if False %}
+                    <tr>
+                        {% if citynames %}
+                            {% for city in citynames %}
+                                <a href="{{ city.city_name }}">{{ city.city_name }}</a> 数量 {{ city.count }} &nbsp;&nbsp;
+
+                            {% endfor %}
+                        {% endif %}
+                    </tr>
+                {% endif %}
+                <tr>
+                    <th>新楼盘</th>
+                    <th>城市</th>
+                    <th>所属区域</th>
+                    <th>均价</th>
+                    <th>物业公司</th>
+                    <th>物业费</th>
+                    <th>地址</th>
+                    <th>产权</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for h in houses %}
+                    <tr>
+                        <td><a href=" {{ h.url }}" target="_blank"/>{{ h.gardenName }}</td>
+                        <th scope="row"><a href="{% url 'house_city'   h.city_name %}">{{ h.city_name }}</a>
+                            <a href="{% url 'geo' h.city_name %}">#</a>
+                        </th>
+                        <th scope="row">{{ h.region }}</th>
+                        <th scope="row">{{ h.reference_price }}</th>
+                        <td>{{ h.property_company }}</td>
+                        <td>{{ h.property_fee }}</td>
+                        <td>{{ h.address }}</td>
+                        <td>{{ h.property_right }}</td>
+                    </tr>
+                    {% if  forloop.last %}
+                        <tr>
+                            <td style="alignment: center">
+                                <div style="float: left">
+                                {% if houses %}
+                                        {% if currentpage != 1 %}
+                                            {% if city %}
+                                                <a align="right" href="/house.html/{{ city }}/{{ lastpage }}"
+                                                   style="alignment: right">
+                                                    <button>上一页{{ lastpage }}</button>
+                                                </a>
+                                            {% else %}
+                                                <a align="right" href="/house.html/{{ lastpage }}"
+                                                   style="alignment: right">
+                                                    <button>上一页{{ lastpage }}</button>
+                                                </a>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+
+                            </td>
+                            <td colspan="6" align="center">
+                                <div>当前是第{{ currentpage }}页</div>
+                            </td>
+                            <td style="alignment: center" colspan="8">
+                                <div style="float: right">
+                                    {% if houses %}
+                                        {% if forloop.counter > 14 %}
+                                            {% if city %}
+                                                <a align="right" href="/house.html/{{ city }}/{{ nextpage }}"
+                                                   style="alignment: right">
+                                                    <button>下一页{{ nextpage }}</button>
+                                                </a>
+                                            {% else %}
+                                                <a align="right" href="/house.html/{{ nextpage }}"
+                                                   style="alignment: right">
+                                                    <button>下一页{{ nextpage }}</button>
+                                                </a>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </a>
+    </div>
+
+{% endblock %}
